@@ -28,13 +28,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     #local apps
-    'company.apps.CompanyConfig',
-    'categories.apps.CategoriesConfig',
-    'products.apps.ProductsConfig',
+    'products',
+    'categories',
+    'company',
 
     #3rd party apps
     'rest_framework',    
-    'rest_framework_simplejwt',
     'drf_spectacular',    
 
 ]
@@ -127,23 +126,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 REST_FRAMEWORK = {
-    
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
-    ),
-    
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
 
 
-from datetime import timedelta
-
-
-SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),
-    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
-}
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'

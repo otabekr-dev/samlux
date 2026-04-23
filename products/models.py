@@ -1,6 +1,6 @@
 from django.db import models
 from categories.models import Category
-
+from django.utils.text import slugify
 
 class Product(models.Model):
     category = models.ForeignKey(
@@ -11,7 +11,7 @@ class Product(models.Model):
     )
 
     name = models.CharField(max_length=200)
-    slug = models.SlugField(unique=True)
+    slug = models.SlugField(unique=True, blank=True, null=True)
 
     short_description = models.CharField(max_length=255)
     description = models.TextField()
@@ -25,7 +25,11 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
-
+    
+    def save(self, *args, **kwargs):
+        if not self.slug or self.slug.strip() == "":
+            self.slug = slugify(self.name)
+        super().save(*args, **kwargs)  
 
 class ProductImage(models.Model):
     product = models.ForeignKey(
@@ -34,7 +38,9 @@ class ProductImage(models.Model):
         related_name='images'
     )
 
-    image = models.ImageField(upload_to='product/')
+    image = models.ImageField(
+        upload_to='product/', null=True, blank=True, default='product/product.png'
+    )
 
     is_main = models.BooleanField(default=False)
 

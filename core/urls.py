@@ -13,7 +13,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('categories.urls')),
     path('api/', include('company.urls')),
-    path('api/', include('product.urls')),
+    path('api/', include('products.urls')),
 
     # drf-spectacular
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
