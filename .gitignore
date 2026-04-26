@@ -295,5 +295,6 @@ pip-selfcheck.json
 .ionide
 
 node_modules/
+staticfiles/
 
 # End of https://www.toptal.com/developers/gitignore/api/python,venv,django,visualstudiocode
